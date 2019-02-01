@@ -1,3 +1,7 @@
+import { Currency } from './currency';
+import { Language } from './language';
+import { RegionalBloc } from './regional-bloc';
+
 export class Country {
     name:string;
     topLevelDomain:string[];
@@ -17,4 +21,10 @@ export class Country {
     borders: string[];
     nativeName: string;
     numericCode: number;
+    currencies: Currency[];
+    languages:Language[];
+    translations:[string,string][];
+    flag:string;
+    regionalBlocs:RegionalBloc[];
+    cioc:string[];
 }
