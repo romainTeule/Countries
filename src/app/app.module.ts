@@ -23,6 +23,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material';
 
+import { NotifierModule } from 'angular-notifier';
+
 
 const appRoutes: Routes = [
   { path: 'countries/:field/:query', component: CountriesListComponent },
@@ -52,6 +54,7 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
+    NotifierModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule],
     

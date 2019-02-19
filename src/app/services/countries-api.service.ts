@@ -5,14 +5,19 @@ import { Country } from '../Models/country';
 import { Constants } from '../Models/constants';
 import { retry, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { error } from 'util';
+
+import { NotifierService } from 'angular-notifier';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CountriesApiService {
 
+  private readonly notifier: NotifierService;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,notifierService: NotifierService) { 
+    this.notifier = notifierService;
+  }
 
   private performRequest<T>(request:string): Observable<T>{
 
@@ -32,7 +37,7 @@ export class CountriesApiService {
       // server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-   
+   this.notifier.notify( 'error', errorMessage );
     return of<T>();
   }
 
@@ -57,7 +62,7 @@ export class CountriesApiService {
     {
       //eturn this.handleError<Observable<Country[]>("Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)");  
      // return  throwError("Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)");  
-
+     this.notifier.notify( 'error', "Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)" );
      return of<Country[]>([]);
     }
    
