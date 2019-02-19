@@ -1,10 +1,23 @@
+<div class="SearchContainer">
+    <div id="label">
+        <mat-label>Recherche :</mat-label>
+    </div>
 
-<select [(ngModel)]="Field">
-    <option *ngFor="let f of Fields" value="{{f}}">
-            {{f}}
-    </option>
+    <mat-form-field appearence="outline">
+        <mat-select [(ngModel)]="Field" placeholder="Champ">
+            <mat-option *ngFor="let f of Fields" value="{{f}}">
+                {{f}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
-</select>
+    <mat-form-field appearence="outline">
+        <input matInput [(ngModel)]="Query" placeholder="Valeur">
+    </mat-form-field>
 
-<label>Recherche </label> <input [(ngModel)]="Query">
-<a  [routerLink]="['/countries' , Field, Query ]"  class="mat-button" >Chercher</a>
+    <div>
+        <button [routerLink]="['/countries' , Field, Query ]" class="mat-stroked-button" color="primary" [disabled]="!Query"
+            >CHERCHER</button>
+
+    </div>
+</div>

@@ -3,3 +3,25 @@
     pointer-events: none;
     color: grey;
   }
+
+  .SearchContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items:center;
+    margin-top:10px; 
+}
+
+.SearchContainer > *{
+  flex-basis:10%;
+  height: 80%;
+  padding-left: 2%; 
+ 
+}
+
+.SearchContainer > #label{
+  flex-basis:5%;
+  
+ 
+}
+

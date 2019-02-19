@@ -2,13 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
 
 import { AppComponent } from './app.component';
 import { CountryDetailComponent } from './country-detail/country-detail.component';
 import { HeaderComponent } from './header/header.component';
 import { CountriesListComponent } from './countries-list/countries-list.component';
 import { SearchComponent } from './search/search.component';
-import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +17,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatToolbarModule} from '@angular/material/toolbar'; 
 import {MatSidenavModule} from '@angular/material/sidenav'; 
-import {MatListModule} from '@angular/material/list'; 
+import {MatListModule} from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSelectModule} from '@angular/material/select'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatInputModule} from '@angular/material';
+
 
 const appRoutes: Routes = [
   { path: 'countries/:field/:query', component: CountriesListComponent },
@@ -41,8 +48,14 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule],
+    
   providers: [],
   bootstrap: [AppComponent]
 })

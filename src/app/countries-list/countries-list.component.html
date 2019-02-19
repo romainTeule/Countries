@@ -1,17 +1,23 @@
-
 <ng-container *ngIf="countries.length!=0;else vide">
-<div *ngFor="let country of countries">
-    <a  [routerLink]="['/detail' , country.alpha3Code ]">  {{country.name}}</a>
 
-</div>
+    <mat-nav-list *ngFor="let country of countries">
+
+            <a mat-list-item [routerLink]="['/detail' , country.alpha3Code ]"> {{country.name}}</a>
+
+    </mat-nav-list>
+    
 
 </ng-container>
 
 
 <ng-template #vide>
-    <div>
+
+    <ng-container>
+        <div>
             C'est bien vide !
 
-    </div>
-        
+        </div>
+    </ng-container>
+
+
 </ng-template>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Query, OnChanges } from '@angular/core';
 import { CountriesApiService } from '../services/countries-api.service';
 import {ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { Country } from '../Models/country';
 import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
@@ -14,7 +14,7 @@ export class CountriesListComponent implements OnInit, OnChanges {
 
   @Input() codes: string[] ;
   @Input() Query: string;
-  ShowSpinner : boolean=false;
+
   countries : Country[]=[];
 
   Field: string;
@@ -24,12 +24,14 @@ export class CountriesListComponent implements OnInit, OnChanges {
   {
   
     this.route.paramMap.pipe(
+     
       switchMap((params: ParamMap) =>
         this.countriesService.getSearchResults(params.get('query'),params.get('field'))
-      )
+      ),
+      
     ).subscribe(value => 
       {this.countries= [];  
-      
+        
       this.countries=value});
    
   } 

@@ -1,9 +1,12 @@
-<mat-toolbar color="primary">
-    <span>My Application</span>
+<mat-toolbar color="accent" id="header">
+    {{title}}
+    <nav style="margin-left: auto">
+      <a mat-button routerLink="/" color="primary">Accueil</a>
+      
+    </nav>
   </mat-toolbar>
 
-
-  <mat-sidenav-container>
+  <mat-sidenav-container id="container">
       <mat-sidenav mode="side" opened> <app-sidebar> </app-sidebar></mat-sidenav>
       <mat-sidenav-content role="main">
         <app-search></app-search>
