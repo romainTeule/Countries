@@ -22,8 +22,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { NotifierModule } from 'angular-notifier';
+import { CurrencyDetailComponent } from './currency-detail/currency-detail.component';
 
 
 const appRoutes: Routes = [
@@ -40,7 +43,8 @@ const appRoutes: Routes = [
     CountriesListComponent,
     SearchComponent,
     PageNotFoundComponent,
-    SidebarComponent
+    SidebarComponent,
+    CurrencyDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,8 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
+    MatGridListModule,
+    MatExpansionModule,
     NotifierModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule],

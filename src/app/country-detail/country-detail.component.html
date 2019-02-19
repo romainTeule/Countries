@@ -1,29 +1,49 @@
 <div *ngIf="Country">
-  <div class="">
-    <div class=" ">
-      <div class="">
-        <label>Nom :</label> {{Country.name}}
-      </div>
-      <div class="">
-        <label>Capitale : </label> {{Country.capital}}
-      </div>
-      <div class="">
-        <label>Population : </label> {{Country.population}}
-      </div>
-      <div class="">
-        <label>Superficie :</label> {{Country.area}}
-      </div>
-      <div class="">
-        <label>Région :</label> {{Country.region}}
-      </div>
-      <div class="">
-        <label>Monnaie :</label> {{Country.currencies[0].name}}
-      </div>
-    </div>
-    <div class=" ">
-      <div class="">
-        <img [src]=Country.flag />
-      </div>
-    </div>
-  </div>
+  <mat-grid-list cols="3" rowHeight="1:1">
+    <mat-grid-tile>
+      <mat-list>
+        <mat-list-item class="">
+          <label>Nom :</label> {{Country.name}}
+        </mat-list-item>
+        <mat-list-item class="">
+          <label>Capitale : </label> {{Country.capital}}
+        </mat-list-item>
+        <mat-list-item class="">
+          <label>Population : </label> {{Country.population}}
+        </mat-list-item>
+        <mat-list-item class="">
+          <label>Superficie : </label> {{Country.area}}
+        </mat-list-item>
+        <mat-list-item class="">
+          <label>Région : </label> {{Country.region}}
+        </mat-list-item>
+        <mat-list-item class="">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Monnaie(s)
+              </mat-panel-title>
+
+            </mat-expansion-panel-header>
+
+           
+              <mat-list>
+                <mat-list-item>
+                  <app-currency-detail *ngFor="let c of Country.currencies" [Currency]="c"></app-currency-detail>
+                </mat-list-item>
+              </mat-list>
+           
+
+          </mat-expansion-panel>
+
+
+
+
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+      <img [src]=Country.flag />
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

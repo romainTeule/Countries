@@ -38,7 +38,7 @@ export class CountriesApiService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
    this.notifier.notify( 'error', errorMessage );
-    return of<T>();
+    return of<T>([]);
   }
 
   getAllCountries(): Observable<Country[]> {
