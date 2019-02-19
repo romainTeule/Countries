@@ -1,3 +1,17 @@
-<div *ngFor="let code of codes">
-  <app-country-detail [code]="code"> </app-country-detail>
+
+<ng-container *ngIf="countries.length!=0;else vide">
+<div *ngFor="let country of countries">
+    <a  [routerLink]="['/detail' , country.alpha3Code ]">  {{country.name}}</a>
+
 </div>
+
+</ng-container>
+
+
+<ng-template #vide>
+    <div>
+            C'est bien vide !
+
+    </div>
+        
+</ng-template>

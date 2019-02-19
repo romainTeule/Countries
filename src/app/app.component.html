@@ -1,7 +1,13 @@
-<app-header></app-header>
+<mat-toolbar color="primary">
+    <span>My Application</span>
+  </mat-toolbar>
 
-<div class="col-lg-2">Sidebar </div>
-<div class="col-lg-9">
-  <app-search></app-search>
-  <router-outlet></router-outlet>
-</div>
+
+  <mat-sidenav-container>
+      <mat-sidenav mode="side" opened> <app-sidebar> </app-sidebar></mat-sidenav>
+      <mat-sidenav-content role="main">
+        <app-search></app-search>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+

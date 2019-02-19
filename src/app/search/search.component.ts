@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CountriesApiService } from '../services/countries-api.service';
+import { Constants } from '../Models/constants';
 
 @Component({
   selector: 'app-search',
@@ -9,15 +10,18 @@ import { CountriesApiService } from '../services/countries-api.service';
 export class SearchComponent implements OnInit {
 
   Query:String;
-  Field:String;
+  Field:String=Constants.NAME;
 
-  constructor() { }
+  Fields:string[]=[...Constants.SearchableFields];
+  constructor() {
+    
+    console.log(this.Fields);
+   }
 
   ngOnInit() {
+    
+    console.log(this.Fields);
   }
 
-  onClick(){
-   
-   
-  }
+ 
 }

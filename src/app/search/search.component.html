@@ -1,2 +1,10 @@
+
+<select [(ngModel)]="Field">
+    <option *ngFor="let f of Fields" value="{{f}}">
+            {{f}}
+    </option>
+
+</select>
+
 <label>Recherche </label> <input [(ngModel)]="Query">
-<a  [routerLink]="['/countries' , Query ]"  class="btn btn-primary" >Chercher</a>
+<a  [routerLink]="['/countries' , Field, Query ]"  class="mat-button" >Chercher</a>

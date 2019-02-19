@@ -8,13 +8,22 @@ import { CountryDetailComponent } from './country-detail/country-detail.componen
 import { HeaderComponent } from './header/header.component';
 import { CountriesListComponent } from './countries-list/countries-list.component';
 import { SearchComponent } from './search/search.component';
-import { SearchResultsComponent } from './search-results/search-results.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatSidenavModule} from '@angular/material/sidenav'; 
+import {MatListModule} from '@angular/material/list'; 
 
 const appRoutes: Routes = [
-  { path: 'countries/:query', component: CountriesListComponent },
-  { path: '**', component: PageNotFoundComponent }];
+  { path: 'countries/:field/:query', component: CountriesListComponent },
+  { path: 'detail/:countrycode', component: CountryDetailComponent },
+  { path: '**', component: CountriesListComponent }];
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,14 +31,18 @@ const appRoutes: Routes = [
     HeaderComponent,
     CountriesListComponent,
     SearchComponent,
-    SearchResultsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)],
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

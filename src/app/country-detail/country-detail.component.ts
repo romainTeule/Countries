@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Country } from '../Models/country';
 import { CountriesApiService } from '../services/countries-api.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-country-detail',
@@ -11,16 +13,16 @@ export class CountryDetailComponent implements OnInit {
 
   Country: Country;
   Flag: string;
-  @Input() code = "col";
-  constructor(private countriesAPI: CountriesApiService) { }
+  constructor(private countriesService: CountriesApiService,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.countriesAPI.getCountryByCode(this.code).subscribe(value => {
-    this.Country = value/*,
-      this.countriesAPI.getCountryFlag(this.Country.flag)
-        .subscribe(value => this.Flag = value)
-    */});
 
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.countriesService.getCountryByCode((params.get('countrycode'))
+      )
+    )).subscribe(value => {
+      this.Country = value});
   }
 
 }
