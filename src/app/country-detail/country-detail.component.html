@@ -20,7 +20,10 @@
         <mat-list-item class="">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title>
+              <mat-panel-title  [ngPlural]="Country.currencies.length">
+                  <ng-template ngPluralCase="=0">there is nothing</ng-template>
+                  <ng-template ngPluralCase="=1">there is one</ng-template>
+
                 Monnaie(s)
               </mat-panel-title>
 
@@ -28,8 +31,8 @@
 
            
               <mat-list>
-                <mat-list-item>
-                  <app-currency-detail *ngFor="let c of Country.currencies" [Currency]="c"></app-currency-detail>
+                <mat-list-item *ngFor="let c of Country.currencies">
+                  <app-currency-detail  [Currency]="c"></app-currency-detail>
                 </mat-list-item>
               </mat-list>
            
