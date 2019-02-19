@@ -5,8 +5,8 @@
 
     <mat-form-field appearence="outline">
         <mat-select [(ngModel)]="Field" placeholder="Champ">
-            <mat-option *ngFor="let f of Fields" value="{{f}}">
-                {{f}}
+            <mat-option *ngFor="let f of Fields" value="{{f[0]}}">
+                {{f[0]}}
             </mat-option>
         </mat-select>
     </mat-form-field>

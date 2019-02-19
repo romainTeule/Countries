@@ -14,6 +14,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
   }
 
-  get CurrencyField(): string { return Constants.CURRENCY ; }
-
+  get CurrencyField(): string { return Constants.CURRENCY[0] ; }
+  get RegionField(): string { return Constants.REGION[0] ; }
 }

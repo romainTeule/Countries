@@ -1,50 +1,67 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Country } from '../Models/country';
 import { Constants } from '../Models/constants';
-
+import { retry, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { error } from 'util';
 @Injectable({
   providedIn: 'root'
 })
 export class CountriesApiService {
 
-  private API_BASE_URL: string = "https://restcountries.eu/rest/v2/";
-  private API_ALL_ENDPOINT: string = "all/";
-  private API_CODE_ENDPOINT: string = "alpha/";
-  private API_NAME_ENDPOINT: string = "name/";
-  private API_CURRENCY_ENDPOINT: string = "currency/";
-  private API_RESPONSE_FILTER: string = "?fields=name;alpha3Code";
+
   constructor(private httpClient: HttpClient) { }
 
+  private performRequest<T>(request:string): Observable<T>{
+
+    return this.httpClient.get<T>(request).pipe(
+      retry(1),
+      catchError(error =>this.handleError<T>(error))
+    );
+
+  }
+
+  handleError<T>(error): Observable<T> {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+   
+    return of<T>();
+  }
 
   getAllCountries(): Observable<Country[]> {
-    return this.httpClient.get<Country[]>(this.API_BASE_URL + this.API_ALL_ENDPOINT);
+    return this.performRequest<Country[]>(Constants.API_BASE_URL + Constants.API_ALL_ENDPOINT);
   }
 
   getCountryByCode(code: string): Observable<Country> {
-    return this.httpClient.get<Country>(this.API_BASE_URL + this.API_CODE_ENDPOINT + code);
+    return this.performRequest<Country>(Constants.API_BASE_URL + Constants.API_CODE_ENDPOINT + code);
   }
 
-  getCountryFlag(url: string): Observable<string> {
-    return this.httpClient.post<string>(url, { responseType: 'text' });
-  }
-
-  getCountryByName(name: string): Observable<Country[]> {
-    return this.httpClient.get<Country[]>(this.API_BASE_URL + this.API_NAME_ENDPOINT + name + this.API_RESPONSE_FILTER);
-  }
-
-  getCountryByCurrency(currency: string): Observable<Country[]> {
-    return this.httpClient.get<Country[]>(this.API_BASE_URL + this.API_CURRENCY_ENDPOINT + currency + this.API_RESPONSE_FILTER);
-  }
 
   getSearchResults(query: string, field: string): Observable<Country[]> {
-    switch (field) {
-      case Constants.NAME:
-        return this.getCountryByName(query);
-        break;
-      case Constants.CURRENCY:
-        return this.getCountryByCurrency(query);
+
+    var Endpoint=Constants.SearchableFields.find(x => x[0]==field);
+
+    if (Endpoint!=null)
+    {
+      return this.performRequest<Country[]>(Constants.API_BASE_URL + Endpoint[1] + query + Constants.API_RESPONSE_FILTER);
     }
-  };
+    else
+    {
+      //eturn this.handleError<Observable<Country[]>("Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)");  
+     // return  throwError("Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)");  
+
+     return of<Country[]>([]);
+    }
+   
+    
+   
+  }
 }
