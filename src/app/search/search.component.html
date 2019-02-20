@@ -16,8 +16,9 @@
     </mat-form-field>
 
     <div>
-        <button [routerLink]="['/countries' , Field, Query ]" class="mat-stroked-button" color="primary" [disabled]="!Query || !Field"
-            >CHERCHER</button>
+        <button [routerLink]="['/countries' , Field, Query ]" mat-mini-fab 
+            [disabled]="!Query || !Field"> <mat-icon>search</mat-icon>
+        </button>
 
     </div>
 </div>

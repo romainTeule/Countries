@@ -27,6 +27,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card'; 
 import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatIconModule} from '@angular/material/icon'; 
+import {MatButtonModule} from '@angular/material/button';
 
 import { NotifierModule } from 'angular-notifier';
 
@@ -65,6 +67,8 @@ const appRoutes: Routes = [
     MatExpansionModule,
     MatCardModule,
     MatTabsModule,
+    MatIconModule,
+    MatButtonModule,
     NotifierModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule],
