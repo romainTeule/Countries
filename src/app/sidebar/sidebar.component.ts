@@ -16,4 +16,5 @@ export class SidebarComponent implements OnInit {
 
   get CurrencyField(): string { return Constants.CURRENCY[0] ; }
   get RegionField(): string { return Constants.REGION[0] ; }
+  get LanguageField(): string { return Constants.LANGUAGE[0] ; }
 }
