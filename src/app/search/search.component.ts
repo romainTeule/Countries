@@ -10,7 +10,7 @@ import { Constants } from '../Models/constants';
 export class SearchComponent implements OnInit {
 
   Query:String;
-  Field:String=Constants.NAME[0];
+  Field:String;
 
   Fields:[string,string][]=[...Constants.SearchableFields];
   constructor() {

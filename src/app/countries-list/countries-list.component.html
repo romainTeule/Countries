@@ -1,24 +1,21 @@
-<ng-container *ngIf="countries.length!=0;else vide">
+<ng-container *ngIf="countries.length!=0;">
 
-    <mat-nav-list *ngFor="let country of countries">
+        <mat-nav-list *ngFor="let country of countries">
 
-            <a mat-list-item [routerLink]="['/detail' , country.alpha3Code ]"> {{country.name}}  <img class="flagPreview" [src]=country.flag /></a>
+                <a mat-list-item [routerLink]="['/detail' , country.alpha3Code ]"> {{country.name}} <img
+                                class="flagPreview" [src]=country.flag /></a>
 
-    </mat-nav-list>
-    
+        </mat-nav-list>
+
 
 </ng-container>
+<ng-container *ngIf="countries.length==0 && Query==null">
+
+                <h1 class="mat-headline Information">C'est bien vide ! Commencez vos recherches ;) </h1>
+
+</ng-container>
+<ng-container *ngIf="countries.length==0 && Query!=null">
 
 
-<ng-template #vide>
-
-            <mat-nav-list >
-
-                    <a mat-list-item >  C'est bien vide !</a>
-        
-            </mat-nav-list>
-      
-  
-
-
-</ng-template>
+                <h1 class="mat-headline Information">  Aucun Resultat pour {{Query}}</h1>
+</ng-container>

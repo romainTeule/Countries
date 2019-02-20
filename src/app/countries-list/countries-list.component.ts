@@ -12,8 +12,8 @@ import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 })
 export class CountriesListComponent implements OnInit, OnChanges {
 
-  @Input() codes: string[];
-  @Input() Query: string;
+
+  Query: string;
 
   countries: Country[] = [];
 
@@ -24,9 +24,13 @@ export class CountriesListComponent implements OnInit, OnChanges {
 
     this.route.paramMap.pipe(
 
-      switchMap((params: ParamMap) =>
-        this.countriesService.getSearchResults(params.get('query'), params.get('field'))
-      ),
+      switchMap((params: ParamMap) =>{
+
+        this.Query=params.get('query');
+        this.Field=params.get('field');
+        return this.countriesService.getSearchResults(this.Query, this.Field);
+
+      }),
 
     ).subscribe(data => {
       console.log(data);

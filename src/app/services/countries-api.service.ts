@@ -15,15 +15,15 @@ export class CountriesApiService {
 
   private readonly notifier: NotifierService;
 
-  constructor(private httpClient: HttpClient,notifierService: NotifierService) { 
+  constructor(private httpClient: HttpClient, notifierService: NotifierService) {
     this.notifier = notifierService;
   }
 
-  private performRequest<T>(request:string): Observable<T>{
+  private performRequest<T>(request: string): Observable<T> {
 
     return this.httpClient.get<T>(request).pipe(
       retry(1),
-      catchError(error =>this.handleError<T>(error))
+      catchError(error => this.handleError<T>(error))
     );
 
   }
@@ -37,7 +37,7 @@ export class CountriesApiService {
       // server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-   this.notifier.notify( 'error', errorMessage );
+    this.notifier.notify('error', errorMessage);
     return of<T>();
   }
 
@@ -52,20 +52,21 @@ export class CountriesApiService {
 
   getSearchResults(query: string, field: string): Observable<Country[]> {
 
-    var Endpoint=Constants.SearchableFields.find(x => x[0]==field);
+    if (query != null && field != null) {
+      var Endpoint = Constants.SearchableFields.find(x => x[0] == field);
 
-    if (Endpoint!=null)
-    {
-      return this.performRequest<Country[]>(Constants.API_BASE_URL + Endpoint[1] + query + Constants.API_RESPONSE_FILTER);
+      if (Endpoint != null) {
+        return this.performRequest<Country[]>(Constants.API_BASE_URL + Endpoint[1] + query + Constants.API_RESPONSE_FILTER);
+      }
+      else {
+
+        this.notifier.notify('error', "Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)");
+        return of<Country[]>([]);
+      }
     }
-    else
-    {
-      
-     this.notifier.notify( 'error', "Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)" );
-     return of<Country[]>([]);
-    }
-   
-    
-   
+    return of<Country[]>([]);
+
+
+
   }
 }

@@ -16,7 +16,7 @@
     </mat-form-field>
 
     <div>
-        <button [routerLink]="['/countries' , Field, Query ]" class="mat-stroked-button" color="primary" [disabled]="!Query"
+        <button [routerLink]="['/countries' , Field, Query ]" class="mat-stroked-button" color="primary" [disabled]="!Query || !Field"
             >CHERCHER</button>
 
     </div>
