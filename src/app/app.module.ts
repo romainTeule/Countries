@@ -11,9 +11,10 @@ import { CountriesListComponent } from './countries-list/countries-list.componen
 import { SearchComponent } from './search/search.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { CurrencyDetailComponent } from './currency-detail/currency-detail.component';
+
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
 import {MatToolbarModule} from '@angular/material/toolbar'; 
 import {MatSidenavModule} from '@angular/material/sidenav'; 
 import {MatListModule} from '@angular/material/list';
@@ -24,9 +25,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card'; 
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 import { NotifierModule } from 'angular-notifier';
-import { CurrencyDetailComponent } from './currency-detail/currency-detail.component';
+
 
 
 const appRoutes: Routes = [
@@ -60,6 +63,8 @@ const appRoutes: Routes = [
     MatInputModule,
     MatGridListModule,
     MatExpansionModule,
+    MatCardModule,
+    MatTabsModule,
     NotifierModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule],

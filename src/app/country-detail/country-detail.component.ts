@@ -22,7 +22,10 @@ export class CountryDetailComponent implements OnInit {
         this.countriesService.getCountryByCode((params.get('countrycode'))
       )
     )).subscribe(value => {
-      this.Country = value});
+      this.Country = value;
+  });
   }
 
+
+  get LanguageList():string{return this.Country.languages.map(x => x.name).join(', ');}
 }

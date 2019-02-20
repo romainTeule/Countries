@@ -1,54 +1,80 @@
 <div *ngIf="Country">
-  <mat-grid-list cols="3" rowHeight="1:1">
-    <mat-grid-tile>
-      <mat-list>
-        <mat-list-item class="">
-          <label>Nom :</label> {{Country.name}}
-        </mat-list-item>
-        <mat-list-item class="">
-          <label>Capitale : </label> {{Country.capital}}
-        </mat-list-item>
-        <mat-list-item class="">
-          <label>Population : </label> {{Country.population}}
-        </mat-list-item>
-        <mat-list-item class="">
-          <label>Superficie : </label> {{Country.area}}
-        </mat-list-item>
-        <mat-list-item class="">
-          <label>Région : </label> {{Country.region}}
-        </mat-list-item>
-        <mat-list-item class="">
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <p [ngPlural]=" Country.currencies.length">
-                  <ng-template ngPluralCase="=0">Aucune information sur la monnaie</ng-template>
-                  <ng-template ngPluralCase="=1">Monnaie</ng-template>
-                  <ng-template ngPluralCase="other">Monnaies</ng-template>
-                </p>
+  <h1 class="mat-headline" id="DetailTitle">{{Country.name}}</h1>
+  <mat-tab-group>
+    <mat-tab label="Général">
+      <mat-grid-list cols="3" rowHeight="1:1" id="DetailContainer">
 
-              </mat-panel-title>
+        <mat-grid-tile>
 
-            </mat-expansion-panel-header>
+          <mat-list>
 
+            <mat-list-item>
+              <label>Capitale : </label> {{Country.capital}}
+            </mat-list-item>
+            <mat-list-item>
+              <label>Population : </label> {{Country.population}}
+            </mat-list-item>
+            <mat-list-item>
+              <label>Superficie : </label> {{Country.area}}
+            </mat-list-item>
+            <mat-list-item>
+              <label>Région : </label> {{Country.region}}
+            </mat-list-item>
 
-            <mat-list>
-              <mat-list-item *ngFor="let c of Country.currencies">
-                <app-currency-detail [Currency]="c"></app-currency-detail>
-              </mat-list-item>
-            </mat-list>
+            <mat-list-item>
+              <label [ngPlural]=" Country.languages.length">
+                <ng-template ngPluralCase="=1">Langage : </ng-template>
+                <ng-template ngPluralCase="other">Langages :</ng-template>
+              </label> 
+              {{LanguageList}}
+            </mat-list-item>
+          </mat-list>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <img [src]=Country.flag />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-tab>
 
 
-          </mat-expansion-panel>
+    <mat-tab *ngIf="Country.currencies.length>0">
+
+      <ng-template mat-tab-label *ngIf="Country.currencies.length>1">Monnaies ({{Country.currencies.length}})
+      </ng-template>
+      <ng-template mat-tab-label *ngIf="Country.currencies.length==1">Monnaie</ng-template>
+      <mat-grid-list cols="3" rowHeight="1:1">
+
+        <mat-grid-tile>
+          <mat-list>
+            <mat-list-item *ngFor="let c of Country.currencies">
+              <app-currency-detail [Currency]="c"></app-currency-detail>
+            </mat-list-item>
+          </mat-list>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <img [src]=Country.flag />
+        </mat-grid-tile>
+      </mat-grid-list>
 
 
+    </mat-tab>
 
 
-        </mat-list-item>
-      </mat-list>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2">
-      <img [src]=Country.flag />
-    </mat-grid-tile>
-  </mat-grid-list>
+    <mat-tab label="Traductions">
+      <mat-grid-list cols="3" rowHeight="1:1">
+
+        <mat-grid-tile>
+          <mat-list>
+            <mat-list-item *ngFor="let item of Country.translations | keyvalue">
+              <label> {{item.key |uppercase }} </label>: {{item.value}}
+            </mat-list-item>
+          </mat-list>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <img [src]=Country.flag />
+        </mat-grid-tile>
+      </mat-grid-list>
+
+    </mat-tab>
+  </mat-tab-group>
 </div>
