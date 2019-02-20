@@ -6,7 +6,7 @@ export class Constants {
     private static API_CURRENCY_ENDPOINT: string = "currency/";
     private static API_REGION_ENDPOINT: string = "region/";
     private static API_LANGUAGE_ENDPOINT: string = "lang/";
-    public static API_RESPONSE_FILTER: string = "?fields=name;alpha3Code";
+    public static API_RESPONSE_FILTER: string = "?fields=name;alpha3Code;flag";
 
     public static NAME : [string,string] = ["Nom",Constants.API_NAME_ENDPOINT];
     public static CURRENCY : [string,string]= ["Monnaie",Constants.API_CURRENCY_ENDPOINT];

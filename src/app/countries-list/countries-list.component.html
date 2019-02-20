@@ -2,7 +2,7 @@
 
     <mat-nav-list *ngFor="let country of countries">
 
-            <a mat-list-item [routerLink]="['/detail' , country.alpha3Code ]"> {{country.name}}</a>
+            <a mat-list-item [routerLink]="['/detail' , country.alpha3Code ]"> {{country.name}}  <img class="flagPreview" [src]=country.flag /></a>
 
     </mat-nav-list>
     
