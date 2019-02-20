@@ -38,7 +38,7 @@ export class CountriesApiService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
    this.notifier.notify( 'error', errorMessage );
-    return of<T>([]);
+    return of<T>();
   }
 
   getAllCountries(): Observable<Country[]> {
@@ -60,8 +60,7 @@ export class CountriesApiService {
     }
     else
     {
-      //eturn this.handleError<Observable<Country[]>("Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)");  
-     // return  throwError("Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)");  
+      
      this.notifier.notify( 'error', "Une erreur est survenue durant la recherche ( Code 400 : WRONG FIELD)" );
      return of<Country[]>([]);
     }
