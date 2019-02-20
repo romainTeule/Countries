@@ -15,12 +15,12 @@ export class SearchComponent implements OnInit {
   Fields:[string,string][]=[...Constants.SearchableFields];
   constructor() {
     
-    console.log(this.Fields);
+   
    }
 
   ngOnInit() {
     
-    console.log(this.Fields);
+   
   }
 
  

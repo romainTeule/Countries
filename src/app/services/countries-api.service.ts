@@ -19,16 +19,16 @@ export class CountriesApiService {
     this.notifier = notifierService;
   }
 
-  private performRequest<T>(request: string): Observable<T> {
+  private performRequest(request: string): Observable<Country> {
 
-    return this.httpClient.get<T>(request).pipe(
+    return this.httpClient.get<Country>(request).pipe(
       retry(1),
-      catchError(error => this.handleError<T>(error))
+      catchError(error => this.handleError(error))
     );
 
   }
 
-  handleError<T>(error): Observable<T> {
+  handleError(error): Observable<Country>  {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // client-side error
@@ -38,25 +38,48 @@ export class CountriesApiService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     this.notifier.notify('error', errorMessage);
-    return of<T>();
+    return of<Country>();
   }
+  
 
-  getAllCountries(): Observable<Country[]> {
+ /* getAllCountries(): Observable<Country[]> {
     return this.performRequest<Country[]>(Constants.API_BASE_URL + Constants.API_ALL_ENDPOINT);
-  }
+  }*/
 
   getCountryByCode(code: string): Observable<Country> {
-    return this.performRequest<Country>(Constants.API_BASE_URL + Constants.API_CODE_ENDPOINT + code);
+    return this.performRequest(Constants.API_BASE_URL + Constants.API_CODE_ENDPOINT + code);
   }
 
 
+  private performRequestArray(request: string): Observable<Country[]> {
+
+    return this.httpClient.get<Country[]>(request).pipe(
+      retry(1),
+      catchError(error => this.handleErrorArray(error))
+    );
+
+  }
+
+  handleErrorArray(error): Observable<Country[]>  {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    this.notifier.notify('error', errorMessage);
+    return of<Country[]>([]);
+  }
+  
   getSearchResults(query: string, field: string): Observable<Country[]> {
 
     if (query != null && field != null) {
       var Endpoint = Constants.SearchableFields.find(x => x[0] == field);
 
       if (Endpoint != null) {
-        return this.performRequest<Country[]>(Constants.API_BASE_URL + Endpoint[1] + query + Constants.API_RESPONSE_FILTER);
+        return this.performRequestArray(Constants.API_BASE_URL + Endpoint[1] + query + Constants.API_RESPONSE_FILTER);
       }
       else {
 

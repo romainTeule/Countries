@@ -11,11 +11,17 @@
 </ng-container>
 <ng-container *ngIf="countries.length==0 && Query==null">
 
-                <h1 class="mat-headline Information">C'est bien vide ! Commencez vos recherches ;) </h1>
+        <h1 class="mat-headline Information">C'est bien vide ! Commencez vos recherches ;) </h1>
 
 </ng-container>
-<ng-container *ngIf="countries.length==0 && Query!=null">
+<ng-container *ngIf="countries.length==0 && Query!=null && !Loading">
 
 
-                <h1 class="mat-headline Information">  Aucun Resultat pour {{Query}}</h1>
+        <h1 class="mat-headline Information"> Aucun Resultat pour {{Query}}</h1>
+</ng-container>
+
+<ng-container *ngIf="countries.length==0 && Query!=null && Loading">
+        <div>
+                <mat-spinner [diameter]="200" id="progress"></mat-spinner>
+        </div>
 </ng-container>
