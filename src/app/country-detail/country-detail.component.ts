@@ -28,4 +28,5 @@ export class CountryDetailComponent implements OnInit {
 
 
   get LanguageList():string{return this.Country.languages.map(x => x.name).join(', ');}
+  get regionalBlocs():string{return this.Country.regionalBlocs.map(x => x.name).join(', ');}
 }

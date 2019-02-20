@@ -28,6 +28,13 @@
               </label> 
               {{LanguageList}}
             </mat-list-item>
+            <mat-list-item>
+                <label [ngPlural]=" Country.regionalBlocs.length">
+                  <ng-template ngPluralCase="=1">Région : </ng-template>
+                  <ng-template ngPluralCase="other">Régions :</ng-template>
+                </label> 
+                {{regionalBlocs}}
+              </mat-list-item>
           </mat-list>
         </mat-grid-tile>
         <mat-grid-tile colspan="2">
