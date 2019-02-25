@@ -23,6 +23,9 @@ export class CountryDetailComponent implements OnInit {
       )
     )).subscribe(value => {
       this.Country = value;
+      this.Country.currencies=this.Country.currencies.filter(function(e,i){
+          return e.code!=null && e.code!="(none)" && e.name!=null;
+      });
   });
   }
 

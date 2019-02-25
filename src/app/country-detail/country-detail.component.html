@@ -11,13 +11,13 @@
             <mat-list-item>
               <label>Capitale : </label> {{Country.capital}}
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="Country.population">
               <label>Population : </label> {{Country.population}}
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="Country.area">
               <label>Superficie : </label> {{Country.area}}
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="Country.region">
               <label>Région : </label> {{Country.region}}
             </mat-list-item>
 
@@ -28,10 +28,10 @@
               </label> 
               {{LanguageList}}
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="Country.regionalBlocs.length>0">
                 <label [ngPlural]=" Country.regionalBlocs.length">
-                  <ng-template ngPluralCase="=1">Région : </ng-template>
-                  <ng-template ngPluralCase="other">Régions :</ng-template>
+                  <ng-template ngPluralCase="=1">Bloc régional : </ng-template>
+                  <ng-template ngPluralCase="other">Bloc régionaux :</ng-template>
                 </label> 
                 {{regionalBlocs}}
               </mat-list-item>
